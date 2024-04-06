@@ -1,45 +1,4 @@
-import React, { Children } from "react";
-
-// Menggunakan Class Component
-// class Button extends React.Component{
-//   render() {
-//     return (
-//       <button
-//         className="h-10 px-6 font-semibold rounded-md bg-blue-700 text-white"
-//         type="submit"
-//       >
-//         Buy Now
-//       </button>
-//     );
-//   }
-// }
-
-// Menggunakan Functional Component
-const ButtonBlack = ({children, variant }) => {
-  return (
-    <>
-      <button
-        className={`h-10 px-6 font-semibold rounded-md ${variant ? variant : "bg-black"}  text-white`}
-        type="submit"
-      >
-        {children ? children : "Uhuy"}
-      </button>
-    </>
-  );
-};
-
-// Jika ingin warnanya berbeda kita bisa menggunakan tehnik PROPS
-const Button = (props) => {
-  console.log(props);
-  return (
-    <button
-      className={`h-10 px-6 font-semibold rounded-md ${props.variant ? props.variant : "bg-emerald-900"} text-white`}
-      type="submit"
-    >
-      {props.text ? props.text : "Submit"}
-    </button>
-  );
-};
+import Button from "./components/Elements/Button/Button";
 
 function App() {
   return (
@@ -52,9 +11,6 @@ function App() {
         <Button variant="bg-red-700" text="Register"></Button>
         <Button variant="bg-zinc-700"></Button>
         <Button></Button>
-        <ButtonBlack variant={`bg-green-700`}></ButtonBlack>
-        <ButtonBlack variant={`bg-yellow-700`}> Mantap Cuy</ButtonBlack>
-        <ButtonBlack></ButtonBlack>
       </div>
     </div>
   );
