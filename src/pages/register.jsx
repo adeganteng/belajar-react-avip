@@ -5,14 +5,8 @@ import AuthLayouts from "../components/Layouts/AuthLayouts";
 
 const RegisterPage = () => {
   return (
-    <AuthLayouts title={"Register"}>
+    <AuthLayouts title={"Register"} type={"register"}>
       <FormRegister />
-      <p className="text-slate-500 font-normal text-sm">
-        Already an account,{" "}
-        <Link to="/login" className="text-blue-500 font-bold">
-          Log in
-        </Link>
-      </p>
     </AuthLayouts>
   );
 };
