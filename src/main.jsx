@@ -6,12 +6,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/login.jsx";
 import RegisterPage from "./pages/register.jsx";
 import ErrorPage from "./pages/404.jsx";
+import ProductsPage from "./pages/products.jsx";
+import NavbarLayouts from "./components/Layouts/NavbarLayouts.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <div>
+        <NavbarLayouts />
         <h1 className="text-center text-4xl font-bold">Hello World</h1>
       </div>
     ),
@@ -22,9 +25,13 @@ const router = createBrowserRouter([
     element: <LoginPage />,
   },
   {
-    path: "/Register",
+    path: "/register",
     element: <RegisterPage />,
   },
+  {
+    path: "/products",
+    element: <ProductsPage />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
