@@ -1,5 +1,24 @@
+import React from "react";
 import CardProduct from "../components/Fragments/CardProduct";
 import NavbarLayouts from "../components/Layouts/NavbarLayouts";
+
+// Belajar sedikit tentang state
+class Counter extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      count : 0,
+    }
+  }
+  render() {
+    return (
+      <div className="flex gap-3 items-center">
+        <h1 className="text-3xl font-bold text-slate-950">{ this.state.count }</h1>
+        <button className="bg-black text-white p-3" onClick={() => this.setState({count : this.state.count+1}) }>+</button>
+      </div>
+    )
+  }
+}
 
 const ProductsPage = () => {
   return (
@@ -16,6 +35,9 @@ const ProductsPage = () => {
             <CardProduct.FooterCard price={product.price} />
           </CardProduct>
         ))}
+      </div>
+      <div className="flex justify-center ">
+        <Counter />
       </div>
     </div>
   );
