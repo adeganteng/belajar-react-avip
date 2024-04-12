@@ -33,10 +33,10 @@ const NavbarLayouts = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
           >
             <li>
-              <Link className="text-white">Home</Link>
+              <Link to={"/"} className="text-white">Home</Link>
             </li>
             <li>
-              <Link to={"/product"} className="text-white">
+              <Link to={"/products"} className="text-white">
                 Product
               </Link>
             </li>
@@ -69,10 +69,10 @@ const NavbarLayouts = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link className="text-slate-950 font-bold">Home</Link>
+            <Link to={"/"} className="text-slate-950 font-bold">Home</Link>
           </li>
           <li>
-            <Link className="text-slate-950 font-bold">Product</Link>
+            <Link to={"/products"} className="text-slate-950 font-bold">Product</Link>
           </li>
           {/* <li>
               <details>
