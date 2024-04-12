@@ -56,7 +56,7 @@ const ProductsPage = () => {
         {products.length > 0 &&
           products.map((product) => (
             <CardProduct key={product.id}>
-              <CardProduct.HeaderCard image={product.image} />
+              <CardProduct.HeaderCard image={product.image} id={product.id} />
               <CardProduct.BodyCard
                 title={product.title}
                 description={product.description}
@@ -84,32 +84,33 @@ const ProductsPage = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {products.length > 0 && cart.map((item) => {
-              const product = products.find(
-                (product) => product.id === item.id
-              );
-              // if (!product) return null; // Add this line to handle undefined product
-              return (
-                <tr key={item.id}>
-                  <td className="text-slate-950 text-sm">{product.title}</td>
-                  <td className="text-slate-950 text-sm">
-                    $
-                    {product.price.toLocaleString("id-ID", {
-                      styles: "currency",
-                      currency: "USD",
-                    })}
-                  </td>
-                  <td className="text-slate-950 text-sm">{item.qty}</td>
-                  <td className="text-slate-950 text-sm">
-                    $
-                    {(item.qty * product.price).toLocaleString("id-ID", {
-                      styles: "currency",
-                      currency: "USD",
-                    })}
-                  </td>
-                </tr>
-              );
-            })}
+            {products.length > 0 &&
+              cart.map((item) => {
+                const product = products.find(
+                  (product) => product.id === item.id
+                );
+                // if (!product) return null; // Add this line to handle undefined product
+                return (
+                  <tr key={item.id}>
+                    <td className="text-slate-950 text-sm">{product.title}</td>
+                    <td className="text-slate-950 text-sm">
+                      $
+                      {product.price.toLocaleString("id-ID", {
+                        styles: "currency",
+                        currency: "USD",
+                      })}
+                    </td>
+                    <td className="text-slate-950 text-sm">{item.qty}</td>
+                    <td className="text-slate-950 text-sm">
+                      $
+                      {(item.qty * product.price).toLocaleString("id-ID", {
+                        styles: "currency",
+                        currency: "USD",
+                      })}
+                    </td>
+                  </tr>
+                );
+              })}
             <tr ref={totalPriceRef}>
               <td colSpan={3}>
                 <b className="text-slate-950 text-sm">Total Price</b>
