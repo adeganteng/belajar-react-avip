@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CardProduct from "../components/Fragments/CardProduct";
 import NavbarLayouts from "../components/Layouts/NavbarLayouts";
 
@@ -32,6 +32,16 @@ const ProductsPage = () => {
       setCart([...cart, { id, qty: 1 }]);
     }
   };
+
+  // useRef
+  const totalPriceRef = useRef(null);
+  useEffect(() => {
+    if (cart.length > 0) {
+      totalPriceRef.current.style.display = "table-row";
+    } else {
+      totalPriceRef.current.style.display = "none";
+    }
+  }, [cart]);
   return (
     <div className="bg-slate-200 min-h-screen flex justify-center pt-24 px-10 md:px-0">
       <NavbarLayouts />
@@ -92,7 +102,7 @@ const ProductsPage = () => {
                 </tr>
               );
             })}
-            <tr>
+            <tr ref={totalPriceRef}>
               <td colSpan={3}>
                 <b className="text-slate-950 text-sm">Total Price</b>
               </td>
