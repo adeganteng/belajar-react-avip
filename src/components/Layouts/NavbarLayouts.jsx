@@ -1,13 +1,22 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-const email = localStorage.getItem("email");
+import { getUsername } from "../../services/auth.service";
 
 const NavbarLayouts = () => {
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setUsername(getUsername(token));
+    } else {
+      window.location.href= "/login"
+    }
+  }, []);
   const handleLogout = () => {
-    localStorage.removeItem("email");
+    localStorage.removeItem("token");
     localStorage.removeItem("password");
-  }
-  
+  };
+
   return (
     <div className="navbar bg-blue-400 text-primary-content w-11/12 px-8 m-auto rounded-full top-2 fixed left-0 right-0 shadow-sm z-50">
       <div className="navbar-start">
@@ -33,7 +42,9 @@ const NavbarLayouts = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 "
           >
             <li>
-              <Link to={"/"} className="text-white">Home</Link>
+              <Link to={"/"} className="text-white">
+                Home
+              </Link>
             </li>
             <li>
               <Link to={"/products"} className="text-white">
@@ -69,10 +80,14 @@ const NavbarLayouts = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to={"/"} className="text-slate-950 font-bold">Home</Link>
+            <Link to={"/"} className="text-slate-950 font-bold">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to={"/products"} className="text-slate-950 font-bold">Product</Link>
+            <Link to={"/products"} className="text-slate-950 font-bold">
+              Product
+            </Link>
           </li>
           {/* <li>
               <details>
@@ -124,13 +139,11 @@ const NavbarLayouts = () => {
                 Logout
               </Link>
             </li>
-            {email && (
-              <li>
-                <p className="text-center text-white text-sm font-thin">
-                  {email}
-                </p>
-              </li>
-            )}
+            <li>
+              <p className="text-center text-blue-500 text-sm font-bold">
+                {username}
+              </p>
+            </li>
           </ul>
         </div>
       </div>
