@@ -26,17 +26,19 @@ const DetailProductPage = () => {
             </div>
             <div className=" lg:w-1/2 w-full flex flex-col p-3 pt-5 justify-between">
               <div className="flex flex-col gap-y-4">
-                <h1 className=" text-white text-4xl font-bold">{product.title}</h1>
+                <h1 className=" text-white text-4xl font-bold">
+                  {product.title}
+                </h1>
                 <p className="text-slate-200 font-medium">
                   {product.description}
                 </p>
-                <p className="text-slate-50 text-3xl font-bold">${product.price}</p>
+                <p className="text-slate-50 text-3xl font-bold">
+                  ${product.price}
+                </p>
                 <p className="text-slate-50 font-bold">
                   Review ({product.rating.rate}/{product.rating.count})
                 </p>
-                <p className="text-slate-300 font-thin">
-                  #{product.category}
-                </p>
+                <p className="text-slate-300 font-thin">#{product.category}</p>
               </div>
               <div className="card-actions justify-end">
                 <button className="btn btn-primary">Add to Cart</button>

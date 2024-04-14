@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/login.jsx";
@@ -10,17 +9,19 @@ import ProductsPage from "./pages/products.jsx";
 import NavbarLayouts from "./components/Layouts/NavbarLayouts.jsx";
 import ProfilePage from "./pages/profile.jsx";
 import DetailProductPage from "./pages/detailProduct.jsx";
+import { Provider } from "react-redux";
+import store from "./redux/store.js";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <div>
-        <NavbarLayouts />
+        <NavbarLayouts products={[]} />
         <h1 className="text-center text-4xl font-bold">Hello World</h1>
       </div>
     ),
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
   },
   {
     path: "/login",
@@ -32,20 +33,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/products",
-    element: <ProductsPage />
+    element: <ProductsPage />,
   },
   {
     path: "/profile",
-    element : <ProfilePage />
+    element: <ProfilePage />,
   },
   {
     path: "/product/:id",
-    element: <DetailProductPage />
-  }
+    element: <DetailProductPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
