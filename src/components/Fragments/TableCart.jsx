@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { DarkMode } from "../../context/DarkMode";
 
 const TableCart = ({ products }) => {
   const cart = useSelector((state) => state.cart.data);
   const [totalPrice, setTotalPrice] = useState(0);
+  const { value: isDarkMode } = useContext(DarkMode);
 
   useEffect(() => {
     if (products.length > 0 && cart.length > 0) {
@@ -29,10 +31,26 @@ const TableCart = ({ products }) => {
       {/* head */}
       <thead>
         <tr>
-          <th className="text-slate-950 text-sm">Name</th>
-          <th className="text-slate-950 text-sm">Price</th>
-          <th className="text-slate-950 text-sm">Qty</th>
-          <th className="text-slate-950 text-sm">Total</th>
+          <th
+            className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}
+          >
+            Name
+          </th>
+          <th
+            className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}
+          >
+            Price
+          </th>
+          <th
+            className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}
+          >
+            Qty
+          </th>
+          <th
+            className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}
+          >
+            Total
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -43,16 +61,16 @@ const TableCart = ({ products }) => {
             // if (!product) return null; // Add this line to handle undefined product
             return (
               <tr key={item.id}>
-                <td className="text-slate-950 text-sm">{product.title}</td>
-                <td className="text-slate-950 text-sm">
+                <td className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}>{product.title}</td>
+                <td className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}>
                   $
                   {product.price.toLocaleString("id-ID", {
                     styles: "currency",
                     currency: "USD",
                   })}
                 </td>
-                <td className="text-slate-950 text-sm">{item.qty}</td>
-                <td className="text-slate-950 text-sm">
+                <td className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}>{item.qty}</td>
+                <td className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}>
                   $
                   {(item.qty * product.price).toLocaleString("id-ID", {
                     styles: "currency",
@@ -64,10 +82,10 @@ const TableCart = ({ products }) => {
           })}
         <tr ref={totalPriceRef}>
           <td colSpan={3}>
-            <b className="text-slate-950 text-sm">Total Price</b>
+            <b className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}>Total Price</b>
           </td>
           <td>
-            <b className="text-slate-950 text-sm">
+            <b className={`text-slate-950 text-sm ${isDarkMode && " text-white"}`}>
               $
               {totalPrice.toLocaleString("id-ID", {
                 styles: "currency",

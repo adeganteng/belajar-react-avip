@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getDetailProduct } from "../services/product.service";
+import { getDetailProduct, getProduct } from "../services/product.service";
 import NavbarLayouts from "../components/Layouts/NavbarLayouts";
+import { useLogin } from "../hooks/useLogin";
 const DetailProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [products, setProducts] = useState([]);
+  useLogin();
+
+  useEffect(() => {
+    getProduct((data) => {
+      setProducts(data);
+    });
+  }, []);
 
   useEffect(() => {
     getDetailProduct(id, (data) => {
@@ -13,7 +22,7 @@ const DetailProductPage = () => {
   }, [id]);
   return (
     <div className="bg-slate-200 min-h-screen flex justify-center items-center pt-24 px-10">
-      <NavbarLayouts />
+      <NavbarLayouts products={products} />
       <div>
         {Object.keys(product).length > 0 && (
           <div className=" bg-slate-700 shadow-xl lg:w-3/4 w-full flex flex-col lg:flex-row  justify-center m-auto rounded-xl overflow-hidden ">

@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import { useLogin } from "../../hooks/useLogin";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { DarkMode } from "../../context/DarkMode";
 
 const NavbarLayouts = ({ products }) => {
   const username = useLogin();
   const [totalCart, setTotalCart] = useState(0);
   const cart = useSelector((state) => state.cart.data);
   const [totalPrice, setTotalPrice] = useState(0);
+  const { value: isDarkMode, setValue: setIsDarkMode } = useContext(DarkMode);
 
   useEffect(() => {
     if (products.length > 0 && cart.length > 0) {
@@ -25,8 +27,7 @@ const NavbarLayouts = ({ products }) => {
       return acc + item.qty;
     }, 0);
     setTotalCart(sum);
-  })
-
+  });
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -150,7 +151,9 @@ const NavbarLayouts = ({ products }) => {
             className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
           >
             <div className="card-body">
-              <span className="font-bold text-lg text-white">{totalCart} Items</span>
+              <span className="font-bold text-lg text-white">
+                {totalCart} Items
+              </span>
               <span className="text-info">Subtotal: ${totalPrice}</span>
               {/* <div className="card-actions">
                 <button className="btn btn-primary btn-block">View cart</button>
@@ -194,6 +197,15 @@ const NavbarLayouts = ({ products }) => {
               <p className="text-center text-blue-500 text-sm font-bold">
                 {username}
               </p>
+            </li>
+            <li>
+              <button
+                className=" bg-blue-600 p-2 text-white rounded"
+                // onClick={() => setIsDarkMode(!isDarkMode)}
+                onClick={() => setIsDarkMode((prevMode) => !prevMode)}
+              >
+                {isDarkMode ? "Light" : "Dark"}
+              </button>
             </li>
           </ul>
         </div>
