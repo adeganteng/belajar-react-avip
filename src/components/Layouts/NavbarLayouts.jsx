@@ -3,24 +3,15 @@ import { useLogin } from "../../hooks/useLogin";
 import { useSelector } from "react-redux";
 import { useContext, useEffect, useState } from "react";
 import { DarkMode } from "../../context/DarkMode";
+import { useTotalPrice } from "../../context/TotalPriceContext";
 
-const NavbarLayouts = ({ products }) => {
+const NavbarLayouts = () => {
   const username = useLogin();
   const [totalCart, setTotalCart] = useState(0);
   const cart = useSelector((state) => state.cart.data);
   const [totalPrice, setTotalPrice] = useState(0);
   const { value: isDarkMode, setValue: setIsDarkMode } = useContext(DarkMode);
-
-  useEffect(() => {
-    if (products.length > 0 && cart.length > 0) {
-      const sum = cart.reduce((acc, item) => {
-        const product = products.find((product) => product.id === item.id);
-        return acc + product.price * item.qty;
-      }, 0);
-      setTotalPrice(sum);
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  }, [cart, products]);
+  const { total } = useTotalPrice()
 
   useEffect(() => {
     const sum = cart.reduce((acc, item) => {
@@ -154,7 +145,7 @@ const NavbarLayouts = ({ products }) => {
               <span className="font-bold text-lg text-white">
                 {totalCart} Items
               </span>
-              <span className="text-info">Subtotal: ${totalPrice}</span>
+              <span className="text-info">Subtotal: ${total}</span>
               {/* <div className="card-actions">
                 <button className="btn btn-primary btn-block">View cart</button>
               </div> */}
